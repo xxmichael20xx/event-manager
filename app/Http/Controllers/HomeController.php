@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the book now page
+     */
+    public function bookNow() {
+        return view('book-now');
+    }
 }

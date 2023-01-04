@@ -1,15 +1,14 @@
-@extends('layouts.guest', [ 'bodyClass' => 'home' ])
+@extends('layouts.guest', [ 'bodyClass' => 'book__now' ])
 
 @section('content')
     <section class="banner position-relative" id="banner">
         <div class="position-absolute top-50 start-50 translate-middle text-center">
-            <h1 class="text-white">Always Dedicated</h1>
+            <h1 class="text-white">Book Now</h1>
             <h3 class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</h3>
-            <a class="btn btn-info mt-3 text-white" href="javascript:;">Learn More</a>
         </div>
     </section>
 
-    <section class="py-5" id="about">
+    <section class="py-5" id="bookNow">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12 col-12">
