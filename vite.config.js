@@ -9,7 +9,10 @@ export default defineConfig({
                 'resources/sass/custom.scss',
                 'resources/sass/material.scss',
                 'resources/sass/auth.scss',
+                'resources/sass/portal.scss',
+
                 'resources/js/app.js',
+                'resources/js/portal.js',
             ],
             refresh: true,
         }),

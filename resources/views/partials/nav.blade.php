@@ -14,6 +14,15 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is( 'book-now' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('book-now') }}">Boon Now</a>
                 </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
