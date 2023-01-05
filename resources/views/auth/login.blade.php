@@ -1,37 +1,65 @@
 @extends('layouts.auth', [ 'bodyClass' => 'main' ])
 
 @section('content')
-    <section class="sign-in">
-    <div class="container">
-        <div class="signin-content">
-            <div class="signin-image">
-                <figure>
-                    <img src="{{ asset('assets/images/login_image.jpg') }}" alt="sing up image">
-                </figure>
-                <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
-            </div>
-            <div class="signin-form">
-                <h2 class="form-title">Login</h2>
-                <form method="POST" class="register-form" id="login-form">
-                    <div class="form-group">
-                        <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" name="your_name" id="your_name" placeholder="Your Name">
+    <section class="container vh-100">
+        <div class="row vh-100">
+            <div class="col-8 m-auto card shadow">
+                <div class="card-body row p-5">
+                    <div class="col col-md-6 text-center">
+                        <figure>
+                            <img src="{{ asset('assets/images/login_image.jpg') }}" class="img-fluid mx-auto" alt="Login Image">
+                        </figure>
+                        <a href="{{ route('register') }}" class="btn btn-link">Create an account</a>
                     </div>
-                    <div class="form-group">
-                        <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                        <input type="password" name="your_pass" id="your_pass" placeholder="Password">
+                    <div class="col col-md-6">
+                        <h2 class="form-title">Login</h2>
+                        <form method="POST" action="{{ route('login') }}" class="mt-3">
+                            @csrf
+                            <div class="row mb-3">
+                                <label for="email" class="lead">{{ __('Email address') }}</label>
+
+                                <div class="col-md-12">
+                                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password" class="lead">{{ __('Password') }}</label>
+
+                                <div class="col-md-12">
+                                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"  required autocomplete="current-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+
+                                    {{-- @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif --}}
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term">
-                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                    </div>
-                    <div class="form-group form-button">
-                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 @endsection

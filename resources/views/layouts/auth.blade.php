@@ -13,7 +13,7 @@
         <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
         {{-- Styles --}}
-        @vite(['resources/sass/app.scss', 'resources/sass/auth.scss', 'resources/sass/material.scss'])
+        @vite(['resources/sass/app.scss'])
     </head>
     <body class="{{ isset( $bodyClass ) ? $bodyClass : '' }}">
         @yield('content')
