@@ -78,9 +78,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is( 'admin.occasions' ) ? 'active' : '' }}" href="{{ route('admin.occasions') }}">
+                            <a class="nav-link {{ Route::is( 'admin.events' ) ? 'active' : '' }}" href="{{ route('admin.events') }}">
                                 <i class="fa-solid fa-calendar-days"></i>
-                                <span class="nav-link-text">Occasions</span>
+                                <span class="nav-link-text">Events</span>
                             </a>
                         </li>
                     </ul>

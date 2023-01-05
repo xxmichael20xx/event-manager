@@ -39,6 +39,6 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'system.admin' ], function()
     // Define dashboard page
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
-    // Define occasions page
-    Route::get('occasions', [AdminController::class, 'occasions'])->name('admin.occasions');
+    // Define events page
+    Route::get('events', [AdminController::class, 'events'])->name('admin.events');
 });

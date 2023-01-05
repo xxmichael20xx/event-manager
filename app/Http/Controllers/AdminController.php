@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -10,7 +11,9 @@ class AdminController extends Controller
         return view( 'admin.dashboard' );
     }
 
-    public function occasions() {
-        return view( 'admin.occasions' );
+    public function events() {
+        $events = Event::latest()->get();
+
+        return view( 'admin.events', compact( 'events' ) );
     }
 }
