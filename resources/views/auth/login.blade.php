@@ -6,6 +6,9 @@
             <div class="col-8 m-auto card shadow">
                 <div class="card-body row p-5">
                     <div class="col col-md-6 text-center">
+                        <a href="{{ route('/') }}">
+                            <img src="{{ asset('assets/images/back.svg') }}" class="img-fluid auth__back" />
+                        </a>
                         <figure>
                             <img src="{{ asset('assets/images/login_image.jpg') }}" class="img-fluid mx-auto" alt="Login Image">
                         </figure>
@@ -45,7 +48,7 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-info text-white">
                                         {{ __('Login') }}
                                     </button>
 

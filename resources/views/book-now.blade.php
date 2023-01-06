@@ -34,7 +34,7 @@
                                         <label for="name" class="lead">{{ __('Name') }}</label>
 
                                         <div class="col-md-12">
-                                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ Auth::user()->name }}12" readonly required>
+                                            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ Auth::user()->name }}" readonly required>
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -76,7 +76,7 @@
                                         <label for="date" class="lead">{{ __('Date') }}</label>
 
                                         <div class="col-md-12">
-                                            <input type="date" id="date" name="date" class="form-control @error('date') is-invalid @enderror" required>
+                                            <input type="date" id="date" name="date" min="{{ now() }}" max="{{ \Carbon\Carbon::now()->addYears( 10 ) }}" class="form-control @error('date') is-invalid @enderror" required>
 
                                             @error('date')
                                                 <span class="invalid-feedback" role="alert">

@@ -12,6 +12,14 @@ class BookingController extends Controller
      * from the user side /book-now page
      */
     public function bokkingAdd( Request $request ) {
+        $this->validate( $request, [
+            'name' => 'required',
+            'occasion' => 'required',
+            'venue' => 'required',
+            'date' => 'required',
+            'time' => 'required',
+        ] );
+
         $userId = auth()->user()->id;
         $newEvent = new Event;
         $newEvent->user_id = $userId;

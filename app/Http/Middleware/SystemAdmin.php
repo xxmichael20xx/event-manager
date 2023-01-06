@@ -17,10 +17,10 @@ class SystemAdmin
     public function handle(Request $request, Closure $next)
     {
         // Check if user is logged in
-        if ( ! auth()->user() ) return redirect('home');
+        if ( ! auth()->user() ) return redirect('login');
 
         // Check if user role is "admin"
-        if ( auth()->user()->role !== 'admin' ) return redirect('home');
+        if ( auth()->user()->role !== 'admin' ) return redirect('/');
 
         return $next($request);
     }

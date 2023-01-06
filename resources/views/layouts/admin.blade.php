@@ -102,5 +102,6 @@
     </div>
     {{-- Scripts --}}
     @vite(['resources/js/app.js', 'resources/js/portal.js'])
+    @yield('scripts')
 </body>
 </html>

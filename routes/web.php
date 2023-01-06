@@ -41,4 +41,19 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'system.admin' ], function()
     
     // Define events page
     Route::get('events', [AdminController::class, 'events'])->name('admin.events');
+    
+    // Define single event page
+    Route::get('/events/{id}', [AdminController::class, 'eventsShow'])->name('admin.events.show');
+
+    // Define admin add event
+    Route::post('/event/add', [AdminController::class, 'addEvent'])->name('admin.booking.add');
+
+    // Define admin delete event
+    Route::post('/event/delete/{id}', [AdminController::class, 'deleteEvent'])->name('admin.booking.delete');
+
+    // Define admin done event
+    Route::post('/event/done/{id}', [AdminController::class, 'doneEvent'])->name('admin.booking.done');
+
+    // Define admin update event
+    Route::post('/event/update/{id}', [AdminController::class, 'updateEvent'])->name('admin.booking.update');
 });

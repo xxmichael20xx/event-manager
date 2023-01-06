@@ -41,12 +41,15 @@ class LoginController extends Controller
     // Add a custom redirection after login
     // based on user role
     public function redirectTo() {
-        $role = auth()->user()->role;
-
-        if ( $role == 'admin' ) {
+        if ( auth()->user()->role == 'admin' ) {
             return '/admin/dashboard';
         }
 
         return '/book-now';
+    }
+
+    public function authenticated($request, $user)
+    {
+        return redirect( $this->redirectTo() );
     }
 }

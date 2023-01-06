@@ -7,7 +7,6 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/sass/custom.scss',
-                'resources/sass/material.scss',
                 'resources/sass/auth.scss',
                 'resources/sass/portal.scss',
 
