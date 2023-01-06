@@ -1,0 +1,48 @@
+{
+  "resources/sass/custom.scss": {
+    "file": "assets/custom-bd5f1ff7.css",
+    "src": "resources/sass/custom.scss",
+    "isEntry": true
+  },
+  "resources/sass/auth.scss": {
+    "file": "assets/auth-eaeb3eed.css",
+    "src": "resources/sass/auth.scss",
+    "isEntry": true
+  },
+  "resources/js/portal.css": {
+    "file": "assets/portal-50a54fda.css",
+    "src": "resources/js/portal.css"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-b19ddb02.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  },
+  "resources/sass/portal.scss": {
+    "file": "assets/portal-7ebeeecc.css",
+    "src": "resources/sass/portal.scss",
+    "isEntry": true
+  },
+  "__commonjsHelpers-28e086c5.js": {
+    "file": "assets/_commonjsHelpers-28e086c5.js"
+  },
+  "resources/js/portal.js": {
+    "file": "assets/portal-30d070dd.js",
+    "src": "resources/js/portal.js",
+    "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-28e086c5.js"
+    ],
+    "css": [
+      "assets/portal-50a54fda.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-4469d284.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "__commonjsHelpers-28e086c5.js"
+    ]
+  }
+}
