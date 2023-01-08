@@ -184,7 +184,7 @@
                                             @endif
                                         </td>
                                         <td class="cell">
-                                            <a class="btn btn-info text-white" href="{{ route('admin.events.show', [ 'id' => $event->id ]) }}">View</a>
+                                            <a class="btn btn-info text-white" href="{{ route('admin.events.show', [ 'id' => $event->id ]) }}"><i class="fa fa-eye"></i> View</a>
                                         </td>
                                     </tr>
                                 @empty

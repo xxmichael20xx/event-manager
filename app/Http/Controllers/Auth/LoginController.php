@@ -50,6 +50,21 @@ class LoginController extends Controller
 
     public function authenticated($request, $user)
     {
+        if ( $user->status == 'deactivated' ) {
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            $deactivatedMessage = "
+                <i class='fa fa-info-circle'></i> Your account has been deactivated.
+                <br>
+                Reason: {$user->notes}
+                <br>
+                <hr>
+                Please contact <a class='btn btn-link p-0'>admin@events.com</a> for further assistance.
+            ";
+            return redirect( '/login' )->with( 'auth.deactivated', $deactivatedMessage );
+        }
         return redirect( $this->redirectTo() );
     }
 }

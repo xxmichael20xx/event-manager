@@ -46,3 +46,21 @@ $theme-colors: (
 
 /*************************** Theme Styles Section ****************************/
 @import "portal/styles.scss";
+
+.custom__pagination {
+  .page-link {
+    color: #5B99EA;
+    font-weight: bold;
+  }
+
+  .page-link.active,
+  .active > .page-link {
+    color: #FFF;
+    background-color: #5B99EA;
+    border-color: #5B99EA;
+  }
+}
+
+.form-control.custom__text {
+  min-height: 200px;
+}

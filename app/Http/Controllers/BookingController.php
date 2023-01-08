@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Rules\DateChecker;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -12,11 +13,15 @@ class BookingController extends Controller
      * from the user side /book-now page
      */
     public function bokkingAdd( Request $request ) {
+        if ( auth()->user()->email_verified_at == NULL ) {
+            return back()->with( 'auth.verified.false', 'Please check your email to verify your account to create an Booking Event.' );
+        }
+
         $this->validate( $request, [
             'name' => 'required',
             'occasion' => 'required',
             'venue' => 'required',
-            'date' => 'required',
+            'date' => [ 'required', new DateChecker() ],
             'time' => 'required',
         ] );
 

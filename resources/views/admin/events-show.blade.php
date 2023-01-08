@@ -100,7 +100,7 @@
 
                                 {{-- Done buttton --}}
                                 <button type="button" class="btn btn-success text-white" id="event--done">
-                                    <i class="fa fa-check"></i> Done
+                                    <i class="fa fa-check-circle"></i> Done
                                 </button>
 
                                 {{-- Done form --}}
@@ -198,7 +198,7 @@
 
                             @if ( $event->status == 'done' )
                                 <div class="text-center">
-                                    <strong><i class="fa fa-check"></i> Marked as `Done` on {{ $event->updated_at }}</strong>
+                                    <strong><i class="fa fa-check-circle"></i> Marked as `Done` on {{ $event->updated_at }}</strong>
                                 </div>
                             @endif
 
@@ -228,7 +228,7 @@
                     showCancelButton: true,
                     showConfirmButton: true,
                     cancelButtonText: 'Cancel',
-                    confirmButtonText: 'Comfirm'
+                    confirmButtonText: 'Confirm'
                 }).then( (e) => {
                     if ( e.isConfirmed ) {
                         document.getElementById( 'event--archive-form' ).submit()
@@ -246,7 +246,7 @@
                     showCancelButton: true,
                     showConfirmButton: true,
                     cancelButtonText: 'Cancel',
-                    confirmButtonText: 'Comfirm'
+                    confirmButtonText: 'Confirm'
                 }).then( (e) => {
                     if ( e.isConfirmed ) {
                         document.getElementById( 'event--done-form' ).submit()

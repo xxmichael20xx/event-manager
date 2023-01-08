@@ -72,7 +72,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-info text-white">
-                                        {{ __('Register') }}
+                                        <i class="fa fa-pencil"></i> {{ __('Register') }}
                                     </button>
                                 </div>
                             </div>

@@ -15,6 +15,11 @@
                         <a href="{{ route('register') }}" class="btn btn-link">Create an account</a>
                     </div>
                     <div class="col col-md-6">
+                        @if ( $authDeactivated = Session::get( 'auth.deactivated' ) )
+                            <div class="alert alert-danger" role="alert">
+                                {!! $authDeactivated !!}
+                            </div>
+                        @endif
                         <h2 class="form-title">Login</h2>
                         <form method="POST" action="{{ route('login') }}" class="mt-3">
                             @csrf
@@ -49,7 +54,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-info text-white">
-                                        {{ __('Login') }}
+                                        <i class="fa fa-sign-in-alt"></i> {{ __('Login') }}
                                     </button>
 
                                     {{-- @if (Route::has('password.request'))

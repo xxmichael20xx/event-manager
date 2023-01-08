@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Define auth routes (login, register, forgot password)
-Auth::routes();
+Auth::routes([ 'verify' => true ]);
 
 // Define homepage
 Route::get('/', [GuestController::class, 'welcome'])->name('/');
@@ -56,4 +56,19 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'system.admin' ], function()
 
     // Define admin update event
     Route::post('/event/update/{id}', [AdminController::class, 'updateEvent'])->name('admin.booking.update');
+
+    // Define admin actvity logs page
+    Route::get('/activity/logs', [AdminController::class, 'activityLogs'])->name('admin.activity.logs');
+
+    // Define admin users page
+    Route::get('/users', [AdminController::class, 'adminUsers'])->name('admin.users' );
+
+    // Define admin user show page
+    Route::get('/users/{id}', [AdminController::class, 'adminUsersShow'])->name('admin.users.show' );
+
+    // Define admin user activate
+    Route::post('/users/activate/{id}', [AdminController::class, 'adminUsersActivate'])->name('admin.users.activate' );
+
+    // Define admin user deactivate
+    Route::post('/users/deactivate/{id}', [AdminController::class, 'adminUsersDeactivate'])->name('admin.users.deactivate' );
 });

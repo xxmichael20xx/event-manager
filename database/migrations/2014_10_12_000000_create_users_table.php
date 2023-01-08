@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->rememberToken();
             $table->json( 'metadata' )->nullable();
+            $table->string( 'status' )->default( 'activated' )->nullable();
+            $table->text( 'notes' )->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

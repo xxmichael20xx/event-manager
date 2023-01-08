@@ -13,7 +13,12 @@
             <div class="row">
                 <div class="col-8 m-auto card shadow">
                     <div class="card-body row p-5">
-                        @if ( $bookingAddSuccess = Session::get( 'booking.add.success' ) )
+                        @if ( $authVerifiedFalse = Session::get( 'auth.verified.false' ) )
+                            <div class="alert alert-danger text-center">
+                                <p class="h3 mb-0 py-3">{{ $authVerifiedFalse }}</p>
+                                <a href="{{ route('book-now') }}" class="btn btn-link">Reload Page</a>
+                            </div>
+                        @elseif ( $bookingAddSuccess = Session::get( 'booking.add.success' ) )
                             <div class="alert alert-success text-center">
                                 <p class="h3 mb-0 py-3">{{ $bookingAddSuccess }}</p>
                             </div>

@@ -83,6 +83,18 @@
                                 <span class="nav-link-text">Events</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is( 'admin.activity.logs' ) ? 'active' : '' }}" href="{{ route('admin.activity.logs') }}">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="nav-link-text">Activity Logs</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is( 'admin.users' ) ? 'active' : '' }}" href="{{ route('admin.users') }}">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="nav-link-text">Users</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 	        </div>
