@@ -1,17 +1,17 @@
 {
   "resources/sass/custom.scss": {
-    "file": "assets/custom-bd5f1ff7.css",
+    "file": "assets/custom-c693ffeb.css",
     "src": "resources/sass/custom.scss",
     "isEntry": true
-  },
-  "resources/js/portal.css": {
-    "file": "assets/portal-50a54fda.css",
-    "src": "resources/js/portal.css"
   },
   "resources/sass/auth.scss": {
     "file": "assets/auth-eaeb3eed.css",
     "src": "resources/sass/auth.scss",
     "isEntry": true
+  },
+  "resources/js/portal.css": {
+    "file": "assets/portal-50a54fda.css",
+    "src": "resources/js/portal.css"
   },
   "resources/sass/app.scss": {
     "file": "assets/app-b19ddb02.css",
