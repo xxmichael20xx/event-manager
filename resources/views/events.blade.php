@@ -51,7 +51,7 @@
             <div class="col-12 bg-info text-white text-center py-5">
                 <p class="h1 fw-bold mb-0">What are you waiting for?</p>
                 <a href="{{ route('book-now') }}" class="btn btn-dark mt-3">
-                    <span class="h1">Books Yours Now!</span>
+                    <span class="h1">Book Yours Now!</span>
                 </a>
             </div>
         </div>

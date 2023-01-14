@@ -49,20 +49,6 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="email" class="lead">{{ __('Email Address') }}</label>
-
-                                        <div class="col-md-12">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
-
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
                                         <label for="occasion" class="lead">{{ __('Occasion') }}</label>
 
                                         <div class="col-md-12">

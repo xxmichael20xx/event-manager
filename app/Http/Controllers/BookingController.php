@@ -38,7 +38,7 @@ class BookingController extends Controller
             $message = '
                 Your booking has been successfully created.
                 <br><br>
-                Please be advised that you need head to the office to pay a partial payment to fully reserve your Booking, and also so that you can give more precise instruction about the Venue.
+                Please be advised that you need to go to the office to pay a partial payment to fully reserve your Booking, and also so that you can give more precise instruction about the Venue.
                 <br><br>
                 Thank you and have a greay day!
             ';

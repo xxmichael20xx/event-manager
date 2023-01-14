@@ -60,7 +60,7 @@
                                                 <input class="form-control" type="file" id="profile" name="profile" accept="image/*" required>
 
                                                 @error('profile')
-                                                    <span class="invalid-feedback" role="alert">
+                                                    <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
@@ -200,7 +200,13 @@
         const profileInput = document.getElementById( 'profile' )
         profileInput.addEventListener( 'change', ( e ) => {
             const files = e.target.files
+            
             if ( files.length > 0 ) {
+                const extension = files[0].name.substring(files[0].name.lastIndexOf('.') + 1, files[0].name.length);
+                const images = [ 'jpg', 'jpeg', 'png' ]
+
+                if ( images.indexOf( extension ) == -1 ) return false
+
                 const src = URL.createObjectURL( files[0] )
                 const preview = document.getElementById( 'previewProfile' )
                 preview.src = src
