@@ -48,6 +48,20 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label for="phone" class="lead">{{ __('Phone Number') }}</label>
+
+                                <div class="col-md-12">
+                                    <input type="tel" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" autocomplete="phone" required>
+
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label for="password" class="lead">{{ __('Password') }}</label>
 
                                 <div class="col-md-12">

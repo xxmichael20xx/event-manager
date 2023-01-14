@@ -12,9 +12,15 @@
                     <a class="nav-link {{ Request::is( '/' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('/') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is( 'book-now' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('book-now') }}">Boon Now</a>
+                    <a class="nav-link {{ Request::is( 'book-now' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('book-now') }}">Book Now</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is( 'events' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('events') }}">Events</a>
                 </li>
                 @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is( 'my-account' ) ? 'active text-info fw-bold' : '' }}" href="{{ route('my-account') }}">My Account</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
 

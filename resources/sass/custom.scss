@@ -3,7 +3,9 @@ body {
 }
 
 .home,
-.book__now {
+.book__now,
+.my__account,
+.events {
     .navbar-nav a {
         font-size: 15px;
         text-transform: uppercase;
@@ -62,5 +64,18 @@ body {
 .book__now {
     #banner {
         background-image: url('/assets/images/booknow_banner.jpg');
+    }
+}
+
+.book__now {
+    #banner {
+        background-image: url('/assets/images/events-banner.jpg');
+    }
+}
+
+.list-group {
+    .list-group-item.active {
+        background-color: #0dcaf0 !important;
+        border-color: #0dcaf0 !important;
     }
 }

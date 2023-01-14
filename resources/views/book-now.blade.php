@@ -1,4 +1,4 @@
-@extends('layouts.guest', [ 'bodyClass' => 'book__now' ])
+@extends('layouts.guest', [ 'bodyClass' => 'book__now', 'pageTitle' => 'Book Now' ])
 
 @section('content')
     <section class="banner position-relative" id="banner">
@@ -111,9 +111,9 @@
                                         <div class="col-md-12">
                                             <select name="venue" id="venue" class="form-control @error('venue') is-invalid @enderror" required>
                                                 <option value="" selected disabled>Select a venue</option>
-                                                <option value="hallway">Hallway</option>
-                                                <option value="terrace">Terrace</option>
-                                                <option value="garden">Garden</option>
+                                                @foreach ($venues as $venue)
+                                                    <option value="{{ $venue->name }}">{{ $venue->name }}</option>
+                                                @endforeach
                                             </select>
 
                                             @error('venue')

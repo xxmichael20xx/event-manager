@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Define /book-now page
 Route::get('/book-now', [HomeController::class, 'bookNow'])->name('book-now');
+
+// Define /events page
+Route::get('/events', [HomeController::class, 'events'])->name('events');
+
+// Define /my-account page
+Route::get('/my-account', [HomeController::class, 'myAccount'])->name('my-account');
+
+// Define profile update
+Route::post('/profile-update', [HomeController::class, 'profileUpdate'])->name('profile-update');
 
 // Define booking functions
 Route::post('/booking/add', [BookingController::class, 'bokkingAdd'])->name('booking.add');
@@ -71,4 +81,22 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'system.admin' ], function()
 
     // Define admin user deactivate
     Route::post('/users/deactivate/{id}', [AdminController::class, 'adminUsersDeactivate'])->name('admin.users.deactivate' );
+
+    // Define venue page
+    Route::get('/venue', [AdminController::class, 'venues'])->name('admin.venues');
+
+    // Define add venue route
+    Route::post('/venue/add', [AdminController::class, 'venueAdd'])->name('admin.venue.add');
+
+    // Define update venue route
+    Route::post('/venue/update/{id}', [AdminController::class, 'venueUpdate'])->name('admin.venue.update');
+
+    // Define show venue page
+    Route::get('/venue/show/{id}', [AdminController::class, 'venueShow'])->name('admin.venue.show');
+
+    // Define delete venue route
+    Route::post('/venue/delete/{id}', [AdminController::class, 'venueDelete'])->name('admin.venue.delete');
+
+    // Define restore venue route
+    Route::post('/venue/restore/{id}', [AdminController::class, 'venueRestore'])->name('admin.venue.restore');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Venue;
 use App\Rules\DateChecker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -159,5 +160,86 @@ class AdminController extends Controller
         }
 
         return back()->with( 'user.deactivate.fail', 'Failed to deactivate account. Please try again.' );
+    }
+
+    public function venues( Request $request ) {
+        $venues = Venue::latest()->paginate( 10 );
+
+        return view( 'admin.venues', compact( 'venues' ) );
+    }
+
+    public function venueAdd( Request $request ) {
+        $this->validate( $request, [
+            'name' => [ 'required', 'unique:venues' ],
+            'description' => [ 'required' ]
+        ] );
+
+        $newVenue = new Venue;
+        $newVenue->name = $request->name;
+        $newVenue->description = $request->description;
+
+        if ( $newVenue->save() ) {
+            return back()->with( 'venue.add.success', 'New venue has been added.' );
+        }
+
+        return back()->with( 'venue.add.fail', 'Failed to add new venue. Please try again.' );
+    }
+
+    public function venueUpdate( Request $request, $id ) {
+        $this->validate( $request, [
+            'name' => [ 'required', 'unique:venues,name,' . $id . ',id' ],
+            'description' => [ 'required' ]
+        ] );
+
+        $venue = Venue::withTrashed()->where( 'id', $id )->first();
+
+        if ( ! $venue ) {
+            return back()->with( 'venue.update.fail', 'Failed to update Venue. Please try again.' );
+        }
+
+        $venue->name = $request->name;
+        $venue->description = $request->description;
+
+        if ( $venue->save() ) {
+            return back()->with( 'venue.update.success', 'Venue has been successfuly updated.' );
+        }
+
+        return back()->with( 'venue.update.fail', 'Failed to update Venue. Please try again.' );
+    }
+
+    public function venueShow( Request $request, $id ) {
+        $venue = Venue::withTrashed()->where( 'id', $id )->first();
+
+        if ( ! $venue ) abort( 404 );
+
+        return view( 'admin.venue-show', compact( 'venue' ) );
+    }
+
+    public function venueDelete( Request $request, $id ) {
+        $venue = Venue::find( $id );
+
+        if ( ! $venue ) {
+            return back()->with( 'venue.delete.fail', 'Failed to delete venue. Please try again.' );
+        }
+
+        if ( $venue->delete() ) {
+            return back()->with( 'venue.delete.success', 'Venue has been successfully archived.' );
+        }
+
+        return back()->with( 'venue.delete.fail', 'Failed to delete venue. Please try again.' );
+    }
+
+    public function venueRestore( Request $request, $id ) {
+        $venue = Venue::withTrashed()->where( 'id', $id )->first();
+
+        if ( ! $venue ) {
+            return back()->with( 'venue.restore.fail', 'Failed to restore venue. Please try again.' );
+        }
+
+        if ( $venue->restore() ) {
+            return back()->with( 'venue.restore.success', 'Venue has been successfully restored.' );
+        }
+
+        return back()->with( 'venue.restore.fail', 'Failed to restore venue. Please try again.' );
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.guest', [ 'bodyClass' => 'home' ])
+@extends('layouts.guest', [ 'bodyClass' => 'home', 'pageTitle' => 'Home' ])
 
 @section('content')
     <section class="banner position-relative" id="banner">

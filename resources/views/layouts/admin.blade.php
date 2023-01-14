@@ -95,6 +95,12 @@
                                 <span class="nav-link-text">Users</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is( 'admin.venues' ) ? 'active' : '' }}" href="{{ route('admin.venues') }}">
+                                <i class="fa-solid fa-building"></i>
+                                <span class="nav-link-text">Venues</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 	        </div>
