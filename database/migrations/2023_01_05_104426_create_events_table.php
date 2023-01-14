@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string( 'occasion' );
             $table->string( 'venue' );
             $table->date( 'date' );
-            $table->time( 'time' );
+            $table->string( 'time' );
             $table->string( 'status' )->default( 'pending' )->nullable();
             $table->json( 'metadata' )->nullable();
             $table->timestamps();

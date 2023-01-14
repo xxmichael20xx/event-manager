@@ -81,6 +81,7 @@
 
                                         <div class="col-md-12">
                                             <input type="date" id="date" name="date" min="{{ now() }}" max="{{ \Carbon\Carbon::now()->addYears( 10 ) }}" class="form-control @error('date') is-invalid @enderror" required>
+                                            <small class="text-help">Note: Changing date will refresh the available Time and Venue based on the selected date</small>
 
                                             @error('date')
                                                 <span class="invalid-feedback" role="alert">
@@ -94,7 +95,19 @@
                                         <label for="time" class="lead">{{ __('Time') }}</label>
 
                                         <div class="col-md-12">
-                                            <input type="time" id="time" name="time" class="form-control @error('time') is-invalid @enderror" required>
+                                            @php
+                                                $times = [
+                                                    '7AM', '8AM', '9AM', '10AM', '11AM',
+                                                    '12PM', '1PM', '2PM', '3PM', '4PM', '5PM',
+                                                    '6PM', '8PM', '9PM', '10PM'
+                                                ];
+                                            @endphp
+                                            <select name="time" id="time" class="form-control @error('time') is-invalid @enderror" disabled required>
+                                                <option value="" selected disabled>Select a time</option>
+                                                @foreach ($times as $time)
+                                                    <option value="{{ $time }}">{{ $time }}</option>
+                                                @endforeach
+                                            </select>
 
                                             @error('time')
                                                 <span class="invalid-feedback" role="alert">
@@ -108,11 +121,11 @@
                                         <label for="venue" class="lead">{{ __('Venue') }}</label>
 
                                         <div class="col-md-12">
-                                            <select name="venue" id="venue" class="form-control @error('venue') is-invalid @enderror" required>
+                                            <select name="venue" id="venue" class="form-control @error('venue') is-invalid @enderror" disabled required>
                                                 <option value="" selected disabled>Select a venue</option>
-                                                <option value="hallway">Hallway</option>
-                                                <option value="terrace">Terrace</option>
-                                                <option value="garden">Garden</option>
+                                                @foreach ($venues as $venue)
+                                                    <option value="{{ $venue->name }}">{{ $venue->name }}</option>
+                                                @endforeach
                                             </select>
 
                                             @error('venue')
@@ -148,6 +161,7 @@
                                     <th class="cell">Date & Time</th>
                                     <th class="cell">Date Created</th>
                                     <th class="cell">Status</th>
+                                    <th class="cell">Payment Status</th>
                                     <th class="cell"></th>
                                 </tr>
                             </thead>
@@ -165,7 +179,7 @@
                                         <td class="cell">{{ $event->id }}</td>
                                         <td class="cell">{{ $eventName }}</td>
                                         <td class="cell">{{ $event->occasion }}</td>
-                                        <td class="cell">{{ date( 'M d, Y', strtotime( $event->date ) ) }} @ {{ date( 'h:ia', strtotime( $event->time ) ) }}</td>
+                                        <td class="cell">{{ date( 'M d, Y', strtotime( $event->date ) ) }} @ {{ $event->time }}</td>
                                         <td class="cell">{{ $event->created_at->diffForHumans() }}</td>
                                         <td class="cell">
                                             @if ( $event->deleted_at )
@@ -179,6 +193,24 @@
                                             @else
                                                 <div class="text-success">
                                                     <i class="fa-solid fa-circle"></i> Done
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $paymentStatus = $event->payment_status;
+                                            @endphp
+                                            @if ( $paymentStatus == 'no_payment' )
+                                                <div class="text-danger">
+                                                    <i class="fa-solid fa-circle"></i> {{ toWords( $paymentStatus ) }}
+                                                </div>
+                                            @elseif ( $paymentStatus == 'partial' )
+                                                <div class="text-info">
+                                                    <i class="fa-solid fa-circle"></i> {{ toWords( $paymentStatus ) }}
+                                                </div>
+                                            @else
+                                                <div class="text-success">
+                                                    <i class="fa-solid fa-circle"></i> {{ toWords( $paymentStatus ) }}
                                                 </div>
                                             @endif
                                         </td>
@@ -207,4 +239,48 @@
             }
         </script>
     @endif
+@endsection
+
+@section('scripts')
+<script>
+    window.addEventListener( 'DOMContentLoaded', (e) => {
+        const dateInput = document.getElementById( 'date' )
+
+        if ( dateInput ) {
+            dateInput.addEventListener( 'change', () => {
+                if ( dateInput.value !== '') {
+                    fetchAvailableSchedules()
+                }
+            } )
+        }
+
+        function fetchAvailableSchedules() {
+            const dateInput = document.getElementById( 'date' )
+            const data = {
+                'date': dateInput.value,
+            }
+            fetch( '/available-schedules', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify( data )
+            } ).then( r => r.json() ).then( res => {
+                const venue = document.getElementById( 'venue' )
+                const time = document.getElementById( 'time' )
+
+                if ( venue ) {
+                    venue.removeAttribute( 'disabled' )
+                    venue.innerHTML = res.availableVenues
+                }
+
+                if ( time ) {
+                    time.removeAttribute( 'disabled' )
+                    time.innerHTML = res.availableTimes
+                }
+            } )
+        }
+    } )
+</script>
 @endsection

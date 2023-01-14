@@ -40,7 +40,10 @@ Route::get('/my-account', [HomeController::class, 'myAccount'])->name('my-accoun
 Route::post('/profile-update', [HomeController::class, 'profileUpdate'])->name('profile-update');
 
 // Define booking functions
-Route::post('/booking/add', [BookingController::class, 'bokkingAdd'])->name('booking.add');
+Route::post('/booking/add', [BookingController::class, 'bookingAdd'])->name('booking.add');
+
+// Define route to fetch available schedules
+Route::post('/available-schedules', [BookingController::class, 'availableSchedules'])->name('available.schedules');
 
 // Define a group of web routes for admin
 // with a prefix of "admin"
@@ -66,6 +69,9 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'system.admin' ], function()
 
     // Define admin update event
     Route::post('/event/update/{id}', [AdminController::class, 'updateEvent'])->name('admin.booking.update');
+
+    // Define admin event payment route
+    Route::post('/event/payment/{id}', [AdminController::class, 'eventPayment'])->name('admin.event.payment');
 
     // Define admin actvity logs page
     Route::get('/activity/logs', [AdminController::class, 'activityLogs'])->name('admin.activity.logs');

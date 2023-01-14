@@ -16,20 +16,23 @@ class AdminController extends Controller
         $totalEvents = Event::all()->count();
         $todayEvents = Event::whereDate( 'date', Carbon::today() )->get()->count();
         $totalUsers = User::where( 'role', 'user' )->get()->count();
+        $totalSales = Event::all()->sum( 'payment' );
 
-        return view( 'admin.dashboard', compact( 'totalEvents', 'todayEvents', 'totalUsers' ) );
+        return view( 'admin.dashboard', compact( 'totalEvents', 'todayEvents', 'totalUsers', 'totalSales' ) );
     }
 
     public function events() {
         $events = Event::withTrashed()->latest()->get();
+        $venues = Venue::orderBy( 'name', 'desc' )->get();
 
-        return view( 'admin.events', compact( 'events' ) );
+        return view( 'admin.events', compact( 'events', 'venues' ) );
     }
 
     public function eventsShow( Request $request, $id ) {
         $event = Event::withTrashed()->where( 'id', $id )->first();
+        $venues = Venue::orderBy( 'name', 'desc' )->get();
 
-        return view( 'admin.events-show', compact( 'event' ) );
+        return view( 'admin.events-show', compact( 'event', 'venues' ) );
     }
 
     public function deleteEvent( Request $request, $id ) {
@@ -48,10 +51,12 @@ class AdminController extends Controller
     public function doneEvent( Request $request, $id ) {
         $event = Event::find( $id );
         $event->status = 'done';
+
+        $name = ( $event->name == '' ) ? $event->user->name : $event->name; 
         
         if ( $event->save() ) {
             $logTitle = "Booking Event Done";
-            $logDescription = "Event for customer `{$event->name}` has been marked as `Done`. Event ID: {$event->id}";
+            $logDescription = "Event for customer `{$name}` has been marked as `Done`. Event ID: {$event->id}";
             $this->addLog( $logTitle, $logDescription );
             return back()->with( 'booking.done.success', 'Booking event has been successfully marked as `Done`.' );
         }
@@ -81,6 +86,34 @@ class AdminController extends Controller
         }
 
         return back()->with( 'booking.update.fail', 'Failed to update booking event. Please try again.' );
+    }
+
+    public function eventPayment( Request $request, $id ) {
+        $event = Event::find( $id );
+
+        if ( ! $event ) {
+            return back()->with( 'event.add.payment.failed', 'Failed to add payment to event. Please try again.' );
+        }
+
+        $new_payment = $event->payment + $request->amount;
+        $event->payment_status = ( $new_payment == 2500 ) ? 'paid' : 'partial';
+        $event->payment = $new_payment;
+
+        if ( $event->save() ) {
+            $message = 'Payment has been successfuly added this event.';
+            $logTitle = "Event Payment";
+            $logDescription = "Added new payment to the event #{$event->id} with an amount of `₱{$request->amount}`";
+            
+            if ( $new_payment == 2500 ) {
+                $message = 'Event has been fully paid.';
+                $logDescription .= ' and have been marked as Fully paid';
+            }
+            
+            $this->addLog( $logTitle, $logDescription );
+            return back()->with( 'event.add.payment.success', $message );
+        }
+
+        return back()->with( 'event.add.payment.failed', 'Failed to add payment to event. Please try again.' );
     }
 
     public function addEvent( Request $request ) {

@@ -14,4 +14,8 @@ class Event extends Model
     public function user() {
         return $this->belongsTo( User::class, 'user_id', 'id' );
     }
+
+    public function single_venue() {
+        return $this->hasOne( Venue::class, 'id', 'venue' );
+    }
 }

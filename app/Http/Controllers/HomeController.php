@@ -70,7 +70,7 @@ class HomeController extends Controller
             $user->name = $request->name;
             $user->profile = $fileName;
 
-            if ( $request->password ) {
+            if ( ! empty( $request->password ) ) {
                 $user->password = bcrypt( $request->password );
             }
 

@@ -10,4 +10,8 @@ class Venue extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function event() {
+        return $this->belongsTo( Event::class, 'venue' );
+    }
 }
