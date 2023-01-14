@@ -196,7 +196,7 @@ class AdminController extends Controller
     }
 
     public function venues( Request $request ) {
-        $venues = Venue::latest()->paginate( 10 );
+        $venues = Venue::withTrashed()->latest()->paginate( 10 );
 
         return view( 'admin.venues', compact( 'venues' ) );
     }

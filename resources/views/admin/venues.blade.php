@@ -80,8 +80,9 @@
                             <thead>
                                 <tr>
                                     <th class="cell" style="width: 20%;">Name</th>
-                                    <th class="cell" style="width: 45%;">Description</th>
+                                    <th class="cell" style="width: 35%;">Description</th>
                                     <th class="cell" style="width: 17.5%;">Date Added</th>
+                                    <th class="cell" style="width: 10%;">Status</th>
                                     <th class="cell" style="width: 17.5%;"></th>
                                 </tr>
                             </thead>
@@ -91,6 +92,17 @@
                                         <td class="cell">{{ $venue->name }}</td>
                                         <td class="cell">{{ $venue->description }}</td>
                                         <td class="cell">{{ $venue->created_at->diffForHumans() }}</td>
+                                        <td class="cell">
+                                            @if ( $venue->deleted_at )
+                                                <div class="text-danger">
+                                                    <i class="fa-solid fa-circle"></i> Archived
+                                                </div>
+                                            @else
+                                                <div class="text-success">
+                                                    <i class="fa-solid fa-circle"></i> Active
+                                                </div>
+                                            @endif
+                                        </td>
                                         <td class="cell">
                                             <a class="btn btn-info text-white" href="{{ route('admin.venue.show', [ 'id' => $venue->id ]) }}"><i class="fa fa-eye"></i> View</a>
                                         </td>
