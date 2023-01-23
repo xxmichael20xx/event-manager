@@ -4,7 +4,7 @@
     <section class="banner position-relative" id="banner">
         <div class="position-absolute top-50 start-50 translate-middle text-center">
             <h1 class="text-white">Book Now</h1>
-            <h3 class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</h3>
+            <h3 class="text-white">↓</h3>
         </div>
     </section>
 
